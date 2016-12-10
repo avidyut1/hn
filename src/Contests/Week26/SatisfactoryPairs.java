@@ -16,12 +16,11 @@ public class SatisfactoryPairs {
                 for (int b = a + 1; b < n; b++) {
                     boolean lans = false;
                     for (int x = 1; x < n && !lans; x++) {
-                        for (int y = 1; y < n && !lans; y++) {
-                            if (a * x + b * y == n) {
-                                ans++;
-                                lans = true;
-                                break;
-                            }
+                        int y = (n - (a * x));
+                        if (y > 0 && y % b == 0) {
+                            ans++;
+                            lans = true;
+                            break;
                         }
                     }
                 }
