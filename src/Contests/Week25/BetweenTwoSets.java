@@ -21,7 +21,7 @@ public class BetweenTwoSets {
                 b[i] = in.readInt();
             }
             int sol = 0;
-            for (int i = 2; i <= 100; i++) {
+            for (int i = 1; i <= 100; i++) {
                 boolean fx = true;
                 for (int j = 0; j < n; j++) {
                     if(a[j] > i) {
