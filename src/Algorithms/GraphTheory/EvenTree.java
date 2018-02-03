@@ -9,9 +9,11 @@ import java.math.*;
 public class EvenTree {
     static int ans = 0;
     static boolean vis[] = new boolean[101];
+
     public static void main(String args[]) {
         try {
             InputReader in = new InputReader(System.in);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
             int n = in.readInt();
             int m = in.readInt();
             Vector<Integer> g[] = new Vector[n];
@@ -25,25 +27,30 @@ public class EvenTree {
                 g[v].add(u);
             }
             dfs(0, g);
-            System.out.println(ans);
+            out.write(Integer.toString(ans));
+            out.newLine();
+            out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public static int dfs(int v, Vector<Integer> g[]) {
-        vis[v] = true;
-        int num_nodes_in_subtree = 0;
-        for(int child:  g[v]) {
-            if (!vis[child]) {
-                int num_node = dfs(child, g);
-                if (num_node % 2 == 0) {
+    private static void dfs(int v, Vector<Integer> g[]) {
+        dfsVisit(new boolean[g.length], v, g);
+    }
+    private static int dfsVisit(boolean v[], int ch, Vector<Integer> g[]) {
+        v[ch] = true;
+        int nodes = 0;
+        for (int ele: g[ch]) {
+            if (!v[ele]) {
+                int numNodes = dfsVisit(v, ele, g);
+                if (numNodes % 2 == 0) {
                     ans++;
                 }
                 else {
-                    num_nodes_in_subtree += num_node;
+                    nodes += numNodes;
                 }
             }
         }
-        return num_nodes_in_subtree + 1;
+        return nodes + 1;
     }
 }
